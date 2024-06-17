@@ -4,8 +4,6 @@ const mongoose = require('mongoose');
 const parkingLotSchema = new mongoose.Schema({
     LotId: {
         type: String,
-        required: true,
-        unique: true
     },
     name: {
         type: String,
@@ -23,13 +21,17 @@ const parkingLotSchema = new mongoose.Schema({
         type:Number,
         required:true
     },
-    location: {
-        type: 'Point',
-        coordinates: {
-          type: [Number],
-          required: true
-        }
-      }
+     location: {
+    type: {
+      type: String,
+      enum: ['Point'],
+      required: true
+    },
+    coordinates: {
+      type: [Number],
+      required: true,
+    },
+  }
 });
 
 
