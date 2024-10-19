@@ -23,10 +23,9 @@ const registerVehicle = async (req, res) => {
   await newVehicle.save();
 
   console.log(req.user)
-  // Add the vehicle's ObjectId to the user's vehicles array
+  
   req.user.vehicles.push(newVehicle.vehicleNo);
 
-  // Save the updated user document
   await req.user.save();
 
   res.status(201).json({ message: "Vehicle registered successfully",

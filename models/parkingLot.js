@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 
 const parkingLotSchema = new mongoose.Schema({
-    LotId: {
+    lotId: {
         type: String,
     },
     name: {
@@ -11,11 +11,13 @@ const parkingLotSchema = new mongoose.Schema({
     },
     totalSpots: {
         type: Number,
-        required: true
+        required: true,
+        default:0
     },
     availableSpots:{
         type:Number,
-        required:true
+        required:true,
+        default:0,
     },
     levels:{
         type:Number,
@@ -30,10 +32,15 @@ const parkingLotSchema = new mongoose.Schema({
     coordinates: {
       type: [Number],
       required: true,
+      index:'2dsphere'
     },
   }
 });
 
+
+parkingLotSchema.statics.findByIdCustom = function(id) {
+  return this.findOne({ _id: id });
+};
 
 const ParkingLot = mongoose.model('parkingLot', parkingLotSchema);
 
